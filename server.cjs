@@ -1,5 +1,12 @@
+const cors = require("cors");
 const express = require("express");
 const app = express();
+
+app.use(
+  cors({
+    origin: ["http://localhost:57391", "http://127.0.0.1:57391"],
+  }),
+);
 
 app.get("/", (req, res) => {
   res.send("Hello World!");
@@ -26,6 +33,10 @@ app.get("/products/:id", (req, res) => {
 
   const requestedProduct = products.find((product) => product.id === id);
   res.json(requestedProduct);
+});
+
+app.get("/message", (req, res) => {
+  res.json({ message: "Hello from your Express backend" });
 });
 
 app.listen(3000, () => {
